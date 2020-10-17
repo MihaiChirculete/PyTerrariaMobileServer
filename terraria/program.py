@@ -1,10 +1,11 @@
 # Port of: Terraria.Program
-import datetime
+from datetime import datetime
+
+from terraria.main_class import MainT as Main
 
 
 def display_exception(e):
-    print(f'Server crash: {datetime.time.strftime("%H:%M")}')
-    print(e)
+    print(f'{datetime.now().strftime("%H:%M:%S")} Server crash: {e}')
 
 
 class Program:
@@ -19,6 +20,6 @@ class Program:
         try:
             #SocialAPI.Initialize()
             #LaunchInitializer.LoadParameters(main)
-            main.DedServ()
+            main.ded_serv()
         except Exception as e:
             display_exception(e)
