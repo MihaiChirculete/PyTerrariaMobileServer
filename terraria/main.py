@@ -3,9 +3,14 @@ from os import system
 from random import Random
 
 from terraria.game import Game
+from terraria.lang import Lang
+from terraria.npc import NPC
 
 
 class Main(Game):
+    # Static vars go here
+    instance = None
+
     def __init__(self):
         super().__init__()
         self.offlimit_border_tiles = 40
@@ -21,20 +26,30 @@ class Main(Game):
         self.versionNumber2 = 'v1.3.0.7.5'
         self.var_ded_serv = False   # this is the port of "public static bool dedServ = false;"
         self.show_splash = True
+        self.npc_name = [None] * 540    # this is a list of 540 strings that will contain npc names
+
+        # This line was the content of the actual constructor in the original Main
+        Main.instance = self
         return
 
     def ded_serv(self):
         rand = Random()
 
         if self.auto_shutdown:
+            # To-DO: port the functionality
             pass
         else:
             # system("Python Terraria Mobile Server " + self.versionNumber2)
             pass
-
         self.var_ded_serv = True
         self.show_splash = False
         self.initialize()
+        Lang.set_lang(english=True)
+
+        for i in range(540):
+            npc = NPC()
+            npc.set_defaults(i)
+            self.npc_name[i] = npc.name
 
 
 
