@@ -5,7 +5,7 @@ from random import Random
 from terraria.game import Game
 
 
-class MainT(Game):
+class Main(Game):
     def __init__(self):
         super().__init__()
         self.offlimit_border_tiles = 40
@@ -29,7 +29,7 @@ class MainT(Game):
         if self.auto_shutdown:
             pass
         else:
-            system("Python t Mobile Server " + self.versionNumber2)
+            system("Python Terraria Mobile Server " + self.versionNumber2)
 
         self.var_ded_serv = True
         self.show_splash = False

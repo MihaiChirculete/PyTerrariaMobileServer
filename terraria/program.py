@@ -1,7 +1,7 @@
 # Port of: Terraria.Program
 from datetime import datetime
 
-from terraria.main_class import MainT as Main
+from terraria.main import Main
 
 
 def display_exception(e):
