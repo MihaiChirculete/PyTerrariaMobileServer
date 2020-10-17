@@ -29,7 +29,8 @@ class Main(Game):
         if self.auto_shutdown:
             pass
         else:
-            system("Python Terraria Mobile Server " + self.versionNumber2)
+            # system("Python Terraria Mobile Server " + self.versionNumber2)
+            pass
 
         self.var_ded_serv = True
         self.show_splash = False
