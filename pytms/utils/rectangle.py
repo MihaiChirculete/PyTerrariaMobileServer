@@ -1,7 +1,8 @@
 from pytms.utils.point import Point
 
+
 class Rectangle:
-    def __init__(self, x = 0, y = 0, width = 0, height = 0):
+    def __init__(self, x=0, y=0, width=0, height=0):
         self.x = int(x)
         self.y = int(y)
         self.width = int(width)
@@ -47,8 +48,7 @@ class Rectangle:
     def contains_rectangle(self, value):
         if self.x <= value.x and value.x + value.width <= self.x + self.width and self.y <= value.y:
             return value.y + value.height <= self.y + self.height
-        return  False
-
+        return False
 
     def intersects(self, value):
         if value.x < self.x + self.width and self.x < value.x + value.width and value.y < self.y + self.height:
@@ -91,7 +91,7 @@ class Rectangle:
         num6 = value1.y if value1.y < value2.y else value2.y
         num7 = num if num > num2 else num2
         num8 = num3 if num3 > num4 else num4
-        result = Rectangle(num5, num6, num7-num5, num8-num6)
+        result = Rectangle(num5, num6, num7 - num5, num8 - num6)
         return result
 
     def equals(self, other):
