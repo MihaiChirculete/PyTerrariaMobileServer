@@ -64,7 +64,7 @@ class SetFactory:
         for i in range(len(int_buffer)):
             int_buffer[i] = default_state
 
-        for j in range(len(inputs_list), step=2):
+        for j in range(0, len(inputs_list), 2):
             int_buffer[inputs_list[j]] = inputs_list[j + 1]
 
         return int_buffer
@@ -80,7 +80,7 @@ class SetFactory:
         for i in range(len(array)):
             array[i] = default_state
 
-        for j in range(len(inputs_list), step=2):
+        for j in range(0, len(inputs_list), 2):
             array[inputs_list[j]] = inputs_list[j + 1]
 
         return array
