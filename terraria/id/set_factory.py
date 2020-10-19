@@ -15,14 +15,14 @@ class SetFactory:
         # TO-DO: Port code
         pass
 
-    def create_bool_set(self, types, default_state = None):
+    def create_bool_set(self, *types, default_state = None):
         # TO-DO: Port code
         pass
 
-    def create_int_set(self, default_state, inputs):
+    def create_int_set(self, default_state, *inputs):
         # TO-DO: Port code
         pass
 
-    def create_custom_set(self, default_state, inputs):
+    def create_custom_set(self, default_state, *inputs):
         # TO-DO: Port code
         pass
