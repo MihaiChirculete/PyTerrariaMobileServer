@@ -15,7 +15,7 @@ class SetFactory:
         # TO-DO: Port code
         pass
 
-    def create_bool_set(self, *types, default_state = None):
+    def create_bool_set(self, *types, default_state=None):
         # TO-DO: Port code
         pass
 

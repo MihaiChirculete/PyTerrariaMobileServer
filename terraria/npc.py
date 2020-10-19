@@ -1,4 +1,8 @@
+from pytms.utils.color import Color
+from pytms.utils.rectangle import Rectangle
+from pytms.utils.vector2 import Vector2
 from terraria.entity import Entity
+from terraria.id.npcid import NPCID
 from terraria.lang import Lang
 from terraria.localization.language import Language
 
@@ -96,29 +100,29 @@ class NPC(Entity):
         self.name = ''
         # public static readonly int[,,,] MoonLordAttacksArray = InitializeMoonLordAttacks();
         # public static readonly int[,] MoonLordAttacksArray2 = InitializeMoonLordAttacks2();
-        self.teleport_style: int
-        self.teleport_time: float
-        self.net_spam: int
-        self.dripping: bool
-        self.dripping_slime: bool
-        self.catch_item: int  # was short in original file
+        self.teleport_style: int = None
+        self.teleport_time: float = None
+        self.net_spam: int = None
+        self.dripping: bool = None
+        self.dripping_slime: bool = None
+        self.catch_item: int = None  # was short in original file
         self.release_owner = 255  # was short in original file
-        self.rarity: int
+        self.rarity: int = None
         self.player_interaction = [None] * 17  # public bool[] playerInteraction = new bool[17];
         self.last_interaction = 16
         self.taken_damage_multiplier = float(1)
-        self.gfxOffY: float
-        self.step_speed: float
-        self.teleporting: bool
-        self.stair_fall: bool
-        self.net_stream: bytes  # private byte netStream;
+        self.gfxOffY: float = None
+        self.step_speed: float = None
+        self.teleporting: bool = None
+        self.stair_fall: bool = None
+        self.net_stream: bytes = None  # private byte netStream;
         self.stream_player = [None] * 16  # private byte[] streamPlayer = new byte[16];
-        self.npc_name_lookup: bytes  # private byte npcNameLookup;
-        self.old_pos = [None] * 10  # public Vector2[] oldPos = new Vector2[10];
+        self.npc_name_lookup: bytes = None  # private byte npcNameLookup;
+        self.old_pos = [Vector2()] * 10
         self.old_rot = [None] * 10  # public float[] oldRot = new float[10];
-        self.set_frame_size: bool
-        self.net_skip: int
-        self.net_always: bool
+        self.set_frame_size: bool = None
+        self.net_skip: int = None
+        self.net_always: bool = None
         self.real_life = -1
         self.npc_slots = float(1)
         self.dont_count_me: bool = None
@@ -155,63 +159,63 @@ class NPC(Entity):
         self.local_AI = [None] * NPC.max_AI
         self.ai_action: int = None
         self.ai_style: int = None
-        self.just_hit: bool
-        self.time_left: int
+        self.just_hit: bool = None
+        self.time_left: int = None
         self.target = -1
-        self.damage: int
-        self.defense: int
-        self.def_damage: int
-        self.def_defense: int
-        self.cold_damage: bool
-        self.trap_immune: bool
-        self.sound_hit: int
-        self.sound_killed: int
-        self.life: int
-        self.life_max: int
-        # public Rectangle targetRect;
-        self.frame_counter: float  # was double in original
-        # public Rectangle frame;
+        self.damage: int = None
+        self.defense: int = None
+        self.def_damage: int = None
+        self.def_defense: int = None
+        self.cold_damage: bool = None
+        self.trap_immune: bool = None
+        self.sound_hit: int = None
+        self.sound_killed: int = None
+        self.life: int = None
+        self.life_max: int = None
+        self.target_rect = Rectangle()  # public Rectangle targetRect;
+        self.frame_counter: float = None  # was double in original
+        self.frame = Rectangle()    # public Rectangle frame;
         self._given_name = ''
         self.has_given_name = lambda x: len(self._given_name) != 0
-        # public Color color
+        self.color = Color()    # public Color color
         self.alpha: int = None
-        self.hide: bool
+        self.hide: bool = None
         self.scale = float(1)
         self.knock_back_resist = float(1)
-        self.old_direction: int  # public new int oldDirection; // not sure why this is defined twice in the original
-        self.old_direction_y: int
-        self.old_target: int
-        self.rotation: float
-        self.no_gravity: bool
-        self.no_tile_collide: bool
-        self.net_update: bool
-        self.net_update2: bool
-        self.collide_x: bool
-        self.collide_y: bool
-        self.boss: bool
+        self.old_direction: int = None  # public new int oldDirection; // not sure why this is defined twice in the original
+        self.old_direction_y: int = None
+        self.old_target: int = None
+        self.rotation: float = None
+        self.no_gravity: bool = None
+        self.no_tile_collide: bool = None
+        self.net_update: bool = None
+        self.net_update2: bool = None
+        self.collide_x: bool = None
+        self.collide_y: bool = None
+        self.boss: bool = None
         self.sprite_direction = -1
         self.behind_tiles: bool = None
         self.lava_immune: bool = None
         self.value: float = None
         self.extra_value: float = None
         self.dont_take_damage: bool = None
-        self.net_ID: int
+        self.net_ID: int = None
         self.town_NPC: bool = None
         self.homeless: bool = None
         self.home_tile_x = -1
         self.home_tile_y = -1
-        self.old_homeless: bool
+        self.old_homeless: bool = None
         self.old_home_tile_x = -1
         self.old_home_tile_y = -1
-        self.friendly: bool
-        self.close_door: bool
-        self.door_x: int
-        self.door_y: int
-        self.friendly_regen: int
-        self.breath: int
-        self.breath_counter: int
-        self.reflecting_projectiles: bool
-        self.last_portal_color_index: int
+        self.friendly: bool = None
+        self.close_door: bool = None
+        self.door_x: int = None
+        self.door_y: int = None
+        self.friendly_regen: int = None
+        self.breath: int = None
+        self.breath_counter: int = None
+        self.reflecting_projectiles: bool = None
+        self.last_portal_color_index: int = None
         self.type_name: str = Lang.get_NPC_name_value(self.net_ID)
 
     @staticmethod
@@ -284,3 +288,37 @@ class NPC(Entity):
                 return Main.npc[i].given_or_type_name
 
         return None
+
+    def set_defaults(self, type: int, scale_override: float = -1):
+        self.taken_damage_multiplier = float(1)
+        self.extra_value = float(0)
+        for i in range(len(self.player_interaction)):
+            self.player_interaction[i] = False
+        self.rarity = 0
+        self.dont_count_me = False
+        self.release_owner = 255
+        self.catch_item = 0
+        self.npc_name_lookup = 0
+        self.net_stream = 32
+        flag = False
+        self.net_ID = 0
+        self.net_spam = 0
+        num = 10
+
+        if type >= 0:
+            num = NPCID.Sets.TrailCacheLength[self.type]
+            pass
+
+        if type != len(self.old_pos):
+            # Array.Resize(ref oldPos, num);
+            # Array.Resize(ref oldRot, num);
+            pass
+
+        for j in range(len(self.old_pos)):
+            self.old_rot[j] = float(0)
+            self.old_pos[j].x = float(0)
+            self.old_pos[j].y = float(0)
+
+        for k in range(5):
+            self.buff_time[k] = 0
+            self.buff_time[k] = 0
