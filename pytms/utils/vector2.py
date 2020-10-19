@@ -1,5 +1,6 @@
 import math
 
+
 class Vector2:
     # static methods
     @staticmethod
@@ -28,7 +29,7 @@ class Vector2:
         """
         num = float(value1.x - value2.x)
         num2 = float(value1.y - value2.y)
-        num3 = float(num**2 + num2**2)
+        num3 = float(num ** 2 + num2 ** 2)
         return float(math.sqrt(num3))
 
     @staticmethod
@@ -41,7 +42,7 @@ class Vector2:
         """
         num = float(value1.x - value2.x)
         num2 = float(value1.y - value2.y)
-        return num**2 + num2**2
+        return num ** 2 + num2 ** 2
 
     @staticmethod
     def dot(value1, value2):
@@ -137,7 +138,7 @@ class Vector2:
         result.y = value1.y + (value2.y - value1.y) * amount
 
         return result
-    
+
     @staticmethod
     def barycentric(value1, value2, value3, amount1, amount2):
         amount1, amount2 = float(amount1), float(amount2)
@@ -158,12 +159,11 @@ class Vector2:
 
         return result
 
-
     # static fields
-    zero = _zero()
-    one = _one()
-    unit_x = _unit_x()
-    unit_y = _unit_y()
+    zero = lambda z: Vector2._zero()
+    one = lambda o: Vector2._one()
+    unit_x = lambda ux: Vector2._unit_x()
+    unit_y = lambda uy: Vector2._unit_y()
 
     def __init__(self, x=0, y=0):
         self.x = float(x)
@@ -171,7 +171,6 @@ class Vector2:
 
     def __str__(self):
         return f'X:{self.x} Y:{self.y}'
-
 
     def equals(self, obj):
         """
@@ -192,7 +191,7 @@ class Vector2:
         Returns the length of the vector
         :return:
         """
-        num = float(self.x**2 + self.y**2)
+        num = float(self.x ** 2 + self.y ** 2)
         return float(math.sqrt(num))
 
     def get_length_squared(self):
@@ -200,14 +199,14 @@ class Vector2:
         Returns the squared length of the vector
         :return:
         """
-        return self.x**2 + self.y**2
+        return self.x ** 2 + self.y ** 2
 
     def normalize(self):
         """
         Normalizes the vector
         :return:
         """
-        num = float(self.x**2 + self.y**2)
+        num = float(self.x ** 2 + self.y ** 2)
         num2 = float(1) / float(math.sqrt(num))
         self.x *= num2
         self.y *= num2

@@ -5,7 +5,7 @@ class Point(object):
         return Point(0, 0)
 
     # static fields
-    zero = _zero()
+    zero = lambda z: Point._zero()
 
     def __init__(self, x=0, y=0):
         self.x = int(x)
