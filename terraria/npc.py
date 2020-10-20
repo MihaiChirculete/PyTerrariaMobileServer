@@ -306,7 +306,7 @@ class NPC(Entity):
         num = 10
 
         if type >= 0:
-            num = NPCID.Sets.TrailCacheLength[self.type]
+            num = NPCID.Sets.trail_cache_length[self.type]
             pass
 
         if type != len(self.old_pos):

@@ -1,10 +1,12 @@
 # Port of: Terraria.Program
 from datetime import datetime
+import traceback
 
 from terraria.main import Main
 
 
-def display_exception(e):
+def display_exception(e: Exception):
+    traceback.print_exc()
     print(f'{datetime.now().strftime("%H:%M:%S")} Server crash: {e}')
 
 
