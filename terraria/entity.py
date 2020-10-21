@@ -1,11 +1,14 @@
+from pytms.utils.vector2 import Vector2
+
+
 class Entity:
     def __init__(self):
         self.who_am_i: int = None
         self.active: bool = None
-        # self.position :Vector2
-        # self.velocity :Vector2
-        # self.old_position :Vector2
-        # self.old_velocity :Vector2
+        self.position = Vector2()
+        self.velocity = Vector2()
+        self.old_position = Vector2()
+        self.old_velocity = Vector2()
         self.old_direction: int = None
         self.direction = 1
         self.width: int = None
