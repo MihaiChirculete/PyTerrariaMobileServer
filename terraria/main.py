@@ -10,6 +10,7 @@ from terraria.npc import NPC
 class Main(Game):
     # Static vars go here
     instance = None
+    var_ded_serv = False  # this is the port of "public static bool dedServ = false;"
 
     def __init__(self):
         super().__init__()
@@ -24,7 +25,6 @@ class Main(Game):
         self.auto_shutdown = False
         self.versionNumber = 'v1.3.0.7.5'
         self.versionNumber2 = 'v1.3.0.7.5'
-        self.var_ded_serv = False   # this is the port of "public static bool dedServ = false;"
         self.show_splash = True
         self.npc_name = [None] * 540    # this is a list of 540 strings that will contain npc names
 
@@ -41,7 +41,7 @@ class Main(Game):
         else:
             # system("Python Terraria Mobile Server " + self.versionNumber2)
             pass
-        self.var_ded_serv = True
+        Main.var_ded_serv = True
         self.show_splash = False
         self.initialize()
         Lang.set_lang(english=True)
