@@ -94,8 +94,7 @@ class NPC(Entity):
     ignore_player_interactions = 0
 
     def __init__(self):
-        self.active = True
-        self.wet = False
+        super().__init__()
         self.wet_count: int = None
         self.lava_wet: bool = None
         self.max_moon_lord_countdown = 3600
@@ -294,7 +293,7 @@ class NPC(Entity):
 
         return None
 
-    def set_defaults(self, type: int, scale_override: float = -1):
+    def set_defaults(self, npc_type=0, scale_override: float = -1):
         self.taken_damage_multiplier = float(1)
         self.extra_value = float(0)
         for i in range(len(self.player_interaction)):
@@ -310,11 +309,11 @@ class NPC(Entity):
         self.net_spam = 0
         num = 10
 
-        if type >= 0:
-            num = NPCID.Sets.trail_cache_length[type]
+        if npc_type >= 0:
+            num = NPCID.Sets.trail_cache_length[npc_type]
             pass
 
-        if type != len(self.old_pos):
+        if npc_type != len(self.old_pos):
             # Array.Resize(ref oldPos, num);
             # Array.Resize(ref oldRot, num);
             pass
@@ -388,7 +387,7 @@ class NPC(Entity):
         self.old_target = self.target
         self.target_rect = Rectangle()
         self.time_left = self.active_time
-        self.type = type
+        self.type = npc_type
         self.value = float(0)
         self.cold_damage = False
         self.trap_immune = False
@@ -410,7 +409,7 @@ class NPC(Entity):
         for n in range(self.max_AI):
             self.local_AI[n] = float(0)
 
-        if type == 1:
+        if npc_type == 1:
             self.name = 'Blue Slime'
             self.width = 24
             self.height = 18
@@ -426,7 +425,7 @@ class NPC(Entity):
             self.buff_immune[20] = True
             self.buff_immune[31] = False
 
-        elif type == 2:
+        elif npc_type == 2:
             self.name = 'Demon Eye'
             self.width = 30
             self.height = 32
@@ -440,5 +439,73 @@ class NPC(Entity):
             self.value = float(75)
             self.buff_immune[31] = False
 
+        # This is a placeholder so that we have some default values and the program doesnt crash
+        # to be replaced with the actual definition of all NPCs
+        else:
+            self.name = 'Nothing'
+            self.width = 30
+            self.height = 32
+            self.ai_style = 2
+            self.damage = 18
+            self.defense = 2
+            self.life_max = 60
+            self.sound_hit = 1
+            self.knock_back_resist = float(0.8)
+            self.sound_killed = 1
+            self.value = float(75)
+            self.buff_immune[31] = False
+
+        # TO-DO: Port the rest of the NPC's
+        # ...
 
 
+        if flag:  # not sure what purpose this 'flag' actually serves, it would seem that it just enables all buffs?
+            for num2 in range(0, 191):
+                self.buff_immune[num2] = True
+
+        from terraria.main import Main
+
+        if Main.var_ded_serv:
+            self.frame = Rectangle()
+            # Here goes some code that is useless to us since we wont actually be rendering stuff as a server
+            # elif Main.NPC_loaded[type]:
+            # frame = Rectangle(0, 0, Main.npc_texture[type].width, Main.npc_texture[type].height / Main.npc_frame_count[type]
+            # else
+            # set_frame_size = True
+
+        if scale_override > float(0):
+            num3 = int(float(self.width) * self.scale)
+            num4 = int(float(self.height) * self.scale)
+            self.position.x += num3 / 2
+            self.position.y += num4
+            self.scale = scale_override
+            self.width = int(float(self.width) * self.scale)
+            self.height = int(float(self.height) * self.scale)
+
+            if self.height == 16 or self.height == 32:
+                self.height += 1
+
+            self.position.x -= self.width / 2
+            self.position.y -= self.height
+
+        else:
+            self.width = int(float(self.width) * self.scale)
+            self.height = int(float(self.height) * self.scale)
+
+        if self.buff_immune[20]:
+            self.buff_immune[70] = True
+
+        if self.buff_immune[39]:
+            self.buff_immune[153] = True
+
+        self.life = self.life_max
+        self.def_damage = self.damage
+        self.def_defense = self.defense
+        self.net_ID = npc_type
+
+        if Main.expert_mode:
+            self.scale_stats()
+
+    def scale_stats(self):
+        # TO-DO: Port the code from the original
+        pass
