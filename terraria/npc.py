@@ -94,6 +94,10 @@ class NPC(Entity):
     ignore_player_interactions = 0
 
     def __init__(self):
+        self.active = True
+        self.wet = False
+        self.wet_count: int = None
+        self.lava_wet: bool = None
         self.max_moon_lord_countdown = 3600
         self.max_buffs = 5
         self.breath_max = 200
@@ -174,10 +178,10 @@ class NPC(Entity):
         self.life_max: int = None
         self.target_rect = Rectangle()  # public Rectangle targetRect;
         self.frame_counter: float = None  # was double in original
-        self.frame = Rectangle()    # public Rectangle frame;
+        self.frame = Rectangle()  # public Rectangle frame;
         self._given_name = ''
         self.has_given_name = lambda x: len(self._given_name) != 0
-        self.color = Color()    # public Color color
+        self.color = Color()  # public Color color
         self.alpha: int = None
         self.hide: bool = None
         self.scale = float(1)
@@ -323,3 +327,118 @@ class NPC(Entity):
         for k in range(5):
             self.buff_time[k] = 0
             self.buff_time[k] = 0
+
+        for l in range(191):
+            self.buff_immune[l] = False
+
+        self.set_frame_size = False
+        self.buff_immune[31] = True
+        self.net_skip = -2
+        self.real_life = -1
+        self.life_regen = 0
+        self.life_regen_count = 0
+        self.poisoned = False
+        self.soul_drain = False
+        self.venom = False
+        self.shadow_flame = False
+        self.on_fire = False
+        self.midas = False
+        self.ichor = False
+        self.on_frost_burn = False
+        self.confused = False
+        self.love_struck = False
+        self.stinky = False
+        self.dryad_ward = False
+        self.on_fire2 = False
+        self.just_hit = False
+        self.dont_take_damage = False
+        self.npc_slots = float(1)
+        self.lava_immune = False
+        self.lava_wet = False
+        self.wet_count = 0
+        self.wet = False
+        self.town_NPC = False
+        self.homeless = False
+        self.home_tile_x = -1
+        self.home_tile_y = -1
+        self.friendly = False
+        self.behind_tiles = False
+        self.boss = False
+        self.no_tile_collide = False
+        self.rotation = float(0)
+        self.active = True
+        self.alpha = 0
+        self.color = Color()
+        self.collide_x = False
+        self.collide_y = False
+        self.direction = 0
+        self.old_direction = self.direction
+        self.frame_counter = float(0.0)
+        self.net_update = True
+        self.net_update2 = False
+        self.knock_back_resist = float(1)
+        self._given_name = ''
+        self.name = ''
+        self.no_gravity = False
+        self.scale = float(1)
+        self.sound_hit = 0
+        self.sound_killed = 0
+        self.sprite_direction = -1
+        self.target = 16
+        self.old_target = self.target
+        self.target_rect = Rectangle()
+        self.time_left = self.active_time
+        self.type = type
+        self.value = float(0)
+        self.cold_damage = False
+        self.trap_immune = False
+        self.hide = False
+        self.immortal = False
+        self.chaseable = True
+        self.breath = 200
+        self.breath_counter = 0
+        self.reflecting_projectiles = False
+        self.can_ghost_heal = True
+        self.javelined = False
+        self.daybreak = False
+        self.celled = False
+        self.dryad_bane = False
+
+        for m in range(self.max_AI):
+            self.ai[m] = float(0)
+
+        for n in range(self.max_AI):
+            self.local_AI[n] = float(0)
+
+        if type == 1:
+            self.name = 'Blue Slime'
+            self.width = 24
+            self.height = 18
+            self.ai_style = 1
+            self.damage = 7
+            self.defense = 2
+            self.life_max = 25
+            self.sound_hit = 1
+            self.sound_killed = 1
+            self.alpha = 175
+            self.color = Color(0, 80, 255, 100)
+            self.value = float(25)
+            self.buff_immune[20] = True
+            self.buff_immune[31] = False
+
+        elif type == 2:
+            self.name = 'Demon Eye'
+            self.width = 30
+            self.height = 32
+            self.ai_style = 2
+            self.damage = 18
+            self.defense = 2
+            self.life_max = 60
+            self.sound_hit = 1
+            self.knock_back_resist = float(0.8)
+            self.sound_killed = 1
+            self.value = float(75)
+            self.buff_immune[31] = False
+
+
+
