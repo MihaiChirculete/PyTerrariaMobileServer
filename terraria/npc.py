@@ -226,6 +226,7 @@ class NPC(Entity):
 
     @staticmethod
     def shield_strength_tower_max():
+        from terraria.main import Main
         if not Main.expert_mode:
             return NPC.lunar_shield_power_normal
         return NPC.lunar_shield_power_expert
@@ -306,7 +307,7 @@ class NPC(Entity):
         num = 10
 
         if type >= 0:
-            num = NPCID.Sets.trail_cache_length[self.type]
+            num = NPCID.Sets.trail_cache_length[type]
             pass
 
         if type != len(self.old_pos):
