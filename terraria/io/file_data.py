@@ -6,8 +6,8 @@ class FileData:
     def __init__(self, type: str, path: str = None, is_cloud: bool = False):
         self.path = path
         self.is_cloud_save = is_cloud
-        self.metadata: FileMetadata
-        self.name: str
+        self.metadata: FileMetadata = None
+        self.name: str = None
         self.type = type
         self.is_favorite = False
 
