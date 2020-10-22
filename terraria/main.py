@@ -3,7 +3,9 @@ from os import system
 from random import Random
 
 from terraria.game import Game
+from terraria.io.world_file_data import WorldFileData
 from terraria.lang import Lang
+from terraria.localization.language import Language
 from terraria.npc import NPC
 
 
@@ -11,6 +13,12 @@ class Main(Game):
     # Static vars go here
     instance = None
     var_ded_serv = False  # this is the port of "public static bool dedServ = false;"
+    expert_mode = False
+    active_world_file_data = WorldFileData()
+    world_path_name = active_world_file_data.path
+    versionNumber = 'v1.3.0.7.5'
+    versionNumber2 = 'v1.3.0.7.5'
+    world_list = []
 
     def __init__(self):
         super().__init__()
@@ -23,8 +31,6 @@ class Main(Game):
         self.max_buff_types = 191
         self.max_glow_masks = 214
         self.auto_shutdown = False
-        self.versionNumber = 'v1.3.0.7.5'
-        self.versionNumber2 = 'v1.3.0.7.5'
         self.show_splash = True
         self.npc_name = [None] * 540    # this is a list of 540 strings that will contain npc names
 
@@ -51,6 +57,14 @@ class Main(Game):
             npc.set_defaults(i)
             self.npc_name[i] = npc.name
 
+        while Main.world_path_name is None or Main.world_path_name == '':
+            flag = True
+            while flag:
+                Main.load_worlds()
+                print(Language.get_text_value('CLI.MobileServer', Main.versionNumber2))
+
+                for j in range(len(Main.world_list)):
+                    print(f'{j+1}       {Main.world_list[j].name}')
 
 
     def initialize(self):
